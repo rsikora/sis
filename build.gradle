@@ -1,0 +1,53 @@
+version = '1.0'
+archivesBaseName = 'sis'
+distClassifier = 'dist'
+distDir = "$archivesBaseName-$version-$distClassifier"
+
+defaultTasks 'clean', 'assemble'
+
+allprojects {
+  usePlugin 'java'
+  usePlugin 'maven'
+  usePlugin 'eclipse'
+
+  sourceCompatibility = 1.6
+  targetCompatibility = 1.6
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+subprojects {
+  group = 'cz.snet'
+	archivesBaseName = "sis-$name"
+	
+  dependencies {
+    testCompile 'junit:junit:4.7'
+  }
+  
+}
+
+dependsOnChildren()
+
+dependencies {
+  subprojects.each {
+    compile project(path: it.path)
+  }
+}
+
+assemble << {
+  copy {
+    into("build/dist/$distDir/lib")
+    from configurations.runtime
+  }
+  cp = []
+  configurations.runtime.each {
+    cp += "../lib/$it.name"
+  }
+  println cp.join(';')
+}
+
+build << {
+  ant.zip(destfile: "build/${distDir}.zip", basedir: "build/dist/$distDir")
+}

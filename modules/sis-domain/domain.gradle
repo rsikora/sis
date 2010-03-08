@@ -1,0 +1,5 @@
+version = '1.0-M1'
+
+dependencies {
+  compile project(':shared')
+}

@@ -1,0 +1,11 @@
+include 'shared'
+include 'domain'
+include 'sync'
+
+rootProject.name = 'sis'
+rootProject.children.each {project ->
+    project.projectDir = new File(settingsDir, "modules/sis-$project.name")
+    project.buildFileName = "${project.name}.gradle"
+    assert project.projectDir.isDirectory()
+    assert project.buildFile.isFile()
+}
