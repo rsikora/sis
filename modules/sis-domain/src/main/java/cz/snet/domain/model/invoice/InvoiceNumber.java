@@ -10,24 +10,37 @@ public class InvoiceNumber implements ValueObject<InvoiceNumber> {
     private final String prefix;
     private final long value;
     private final int length;
+    private final String invoiceNumber;
 
-    public InvoiceNumber(final String invoiceNumber) {
-        Matcher matcher = INVOICE_NUMBER_PATTERN.matcher(invoiceNumber);
+    private InvoiceNumber(final String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber.trim();
+        final Matcher matcher = INVOICE_NUMBER_PATTERN.matcher(this.invoiceNumber);
         if (!matcher.matches())
-            throw new IllegalArgumentException("Illegal invoice number :" + invoiceNumber);
+            throw new IllegalArgumentException("Illegal invoice number format:" + this.invoiceNumber);
         prefix = matcher.group(1);
         String number = matcher.group(2);
         this.value = Long.valueOf(number);
         this.length = number.length();
     }
 
+    public static InvoiceNumber from(final String invoiceNumber) {
+        return new InvoiceNumber(invoiceNumber);
+    }
+
     @Override
     public String toString() {
-        return toStringInternal(value);
+        return invoiceNumber;
     }
 
     public InvoiceNumber nextNumber() {
-        return new InvoiceNumber(toStringInternal(value + 1));
+        final long nextValue = value + 1;
+        if (isValueOverflow(nextValue))
+            throw new IllegalStateException("Invoice number overflow: " + nextValue);
+        return new InvoiceNumber(toStringInternal(nextValue));
+    }
+
+    private boolean isValueOverflow(long nextValue) {
+        return ("" + nextValue).length() > length;
     }
 
     private String toStringInternal(long value) {

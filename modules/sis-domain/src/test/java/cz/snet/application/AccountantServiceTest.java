@@ -30,7 +30,7 @@ public class AccountantServiceTest {
 
   public void testBilling() throws Exception {
     Billing billing = billingRepository.find(new BillingName());
-    InvoiceNumberFactory numberFactory = new InvoiceNumberFactory(new InvoiceNumber("000001"));
+    InvoiceNumberFactory numberFactory = new InvoiceNumberFactory(InvoiceNumber.from("000001"));
     Invoicing invoicing = InvoicingFactory.newInstance(billing, numberFactory);
     invoicingService.invoice(invoicing);
 

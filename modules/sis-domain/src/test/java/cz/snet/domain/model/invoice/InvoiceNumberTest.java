@@ -13,21 +13,25 @@ import static org.junit.Assert.assertThat;
  * Time: 9:22:46 PM
  */
 public class InvoiceNumberTest {
-    private InvoiceNumber invoiceNumber;
-    private static final String INVOICE_NUMBER = "A001";
-
-    @Before
-    public void setUp() throws Exception {
-        invoiceNumber = new InvoiceNumber(INVOICE_NUMBER);
+    @Test
+    public void testNextNumber() throws Exception {
+        InvoiceNumber invoiceNumber = InvoiceNumber.from("A001");
+        assertThat(invoiceNumber.nextNumber(), is(InvoiceNumber.from("A002")));
     }
 
-    @After
-    public void tearDown() throws Exception {
-        invoiceNumber = null;
+    @Test(expected = IllegalStateException.class)
+    public void testNextNumberOverflow() throws Exception {
+        InvoiceNumber invoiceNumber = InvoiceNumber.from("A999");
+        invoiceNumber.nextNumber();
     }
 
     @Test
-    public void testNextNumber() throws Exception {
-        assertThat(invoiceNumber.nextNumber(), is(new InvoiceNumber("A002")));
+    public void testToString() throws Exception {
+        assertThat(InvoiceNumber.from("A001").toString(), is("A001"));
+    }
+
+    @Test
+    public void testTrimInvoiceNumber() throws Exception {
+        assertThat(InvoiceNumber.from(" A001 ").toString(), is("A001"));
     }
 }
