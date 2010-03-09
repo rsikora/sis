@@ -1,7 +1,5 @@
 package cz.snet.domain.model.invoice;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,8 +28,25 @@ public class InvoiceNumberTest {
         assertThat(InvoiceNumber.from("A001").toString(), is("A001"));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void failWhenIllegalFormat() throws Exception {
+        InvoiceNumber.from(" A001");
+    }
+
     @Test
-    public void testTrimInvoiceNumber() throws Exception {
-        assertThat(InvoiceNumber.from(" A001 ").toString(), is("A001"));
+    public void testEquals() throws Exception {
+        InvoiceNumber invoiceNumber = InvoiceNumber.from("A001");
+        assertThat(invoiceNumber.equals(InvoiceNumber.from("A001")), is(true));
+    }
+
+    @Test
+    public void testNotEquals() throws Exception {
+        InvoiceNumber invoiceNumber = InvoiceNumber.from("A001");
+        assertThat(invoiceNumber.equals(InvoiceNumber.from("B001")), is(false));
+    }
+    @Test
+
+    public void testHashCode() throws Exception {
+        assertThat(InvoiceNumber.from("A001").hashCode(), is(InvoiceNumber.from("A001").hashCode()));
     }
 }

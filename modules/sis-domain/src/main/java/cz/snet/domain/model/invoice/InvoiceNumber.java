@@ -6,17 +6,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InvoiceNumber implements ValueObject<InvoiceNumber> {
-    private final static Pattern INVOICE_NUMBER_PATTERN = Pattern.compile("(\\D*?)(\\d+)");
+    private final static Pattern INVOICE_NUMBER_PATTERN = Pattern.compile("(\\p{Alpha}*?)(\\p{Digit}+)");
     private final String prefix;
     private final long value;
     private final int length;
     private final String invoiceNumber;
 
     private InvoiceNumber(final String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber.trim();
-        final Matcher matcher = INVOICE_NUMBER_PATTERN.matcher(this.invoiceNumber);
+        final Matcher matcher = INVOICE_NUMBER_PATTERN.matcher(invoiceNumber);
         if (!matcher.matches())
-            throw new IllegalArgumentException("Illegal invoice number format:" + this.invoiceNumber);
+            throw new IllegalArgumentException("Illegal invoice number format: '" + invoiceNumber + "'");
+        this.invoiceNumber = invoiceNumber;
         prefix = matcher.group(1);
         String number = matcher.group(2);
         this.value = Long.valueOf(number);
@@ -33,7 +33,7 @@ public class InvoiceNumber implements ValueObject<InvoiceNumber> {
     }
 
     public InvoiceNumber nextNumber() {
-        final long nextValue = value + 1;
+    final long nextValue = value + 1;
         if (isValueOverflow(nextValue))
             throw new IllegalStateException("Invoice number overflow: " + nextValue);
         return new InvoiceNumber(toStringInternal(nextValue));
