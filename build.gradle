@@ -21,9 +21,13 @@ allprojects {
 subprojects {
   group = 'cz.snet'
 	archivesBaseName = "sis-$name"
-	
+
+  
+
   dependencies {
+    runtime 'log4j:log4j:1.2.14'
     testCompile 'junit:junit:4.7'
+    testCompile 'org.mockito:mockito-all:1.8.2'
   }
   
 }

@@ -9,4 +9,6 @@
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
   <classpathentry kind="src" path="/shared" combineaccessrules="false"/>
   <classpathentry kind="lib" path="H:/.gradle/cache/junit/junit/jars/junit-4.7.jar"/>
+  <classpathentry kind="lib" path="H:/.gradle/cache/log4j/log4j/jars/log4j-1.2.14.jar"/>
+  <classpathentry kind="lib" path="H:/.gradle/cache/org.mockito/mockito-all/jars/mockito-all-1.8.2.jar"/>
 </classpath>

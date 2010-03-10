@@ -44,8 +44,8 @@ public class InvoiceNumberTest {
         InvoiceNumber invoiceNumber = InvoiceNumber.from("A001");
         assertThat(invoiceNumber.equals(InvoiceNumber.from("B001")), is(false));
     }
-    @Test
 
+    @Test
     public void testHashCode() throws Exception {
         assertThat(InvoiceNumber.from("A001").hashCode(), is(InvoiceNumber.from("A001").hashCode()));
     }

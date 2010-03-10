@@ -33,7 +33,7 @@ public class InvoiceNumber implements ValueObject<InvoiceNumber> {
     }
 
     public InvoiceNumber nextNumber() {
-    final long nextValue = value + 1;
+        final long nextValue = value + 1;
         if (isValueOverflow(nextValue))
             throw new IllegalStateException("Invoice number overflow: " + nextValue);
         return new InvoiceNumber(toStringInternal(nextValue));
