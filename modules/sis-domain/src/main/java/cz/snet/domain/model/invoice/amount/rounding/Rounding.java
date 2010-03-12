@@ -10,36 +10,18 @@ import java.math.BigDecimal;
  * Date: Mar 10, 2010
  * Time: 1:51:16 AM
  */
-public class Rounding implements ValueObject<Rounding> {
+public class Rounding extends Amount {
     private static final BigDecimal MAX_ROUNDING = new BigDecimal("0.99");
-    private final Amount value;
 
-    protected Rounding(Amount value) {
-        this.value = value;
+    protected Rounding(BigDecimal value) {
+        super(value);
         if (invariantIsNotSatisfied())
             throw new IllegalArgumentException("Rounding invariant { |rounding| <= 0.99 } is not satisfied for " + toString());
     }
 
     private boolean invariantIsNotSatisfied() {
-        BigDecimal absoluteRounding = value.value().abs();
+        BigDecimal absoluteRounding = value.abs();
         return MAX_ROUNDING.compareTo(absoluteRounding) < 0;
-    }
-
-    public Amount value() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Rounding)) return false;
-        Rounding that = (Rounding) o;
-        return value.equals(that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
     }
 
     @Override

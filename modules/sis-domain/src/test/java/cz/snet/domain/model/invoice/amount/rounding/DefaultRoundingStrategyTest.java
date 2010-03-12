@@ -54,7 +54,7 @@ public class DefaultRoundingStrategyTest {
         Amount amount = Amount.from(fixture.param2);
         Rounding rounding = DefaultRoundingStrategyTest.rounding.totalSumRoundingFrom(amount);
         log.debug(rounding);
-        assertThat(rounding.value().add(amount).value(), is(fixture.result));
+        assertThat(rounding.value().add(fixture.param2), is(fixture.result));
     }
 
 }

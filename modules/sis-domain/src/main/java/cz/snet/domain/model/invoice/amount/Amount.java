@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class Amount implements ValueObject<Amount> {
-    private final BigDecimal value;
+    protected final BigDecimal value;
 
-    private Amount(BigDecimal value) {
+    protected Amount(BigDecimal value) {
         if (isRoundingNeededFor(value))
             throw new IllegalArgumentException("Rounding is needed for " + value);
         this.value = value.setScale(2, RoundingMode.UNNECESSARY);

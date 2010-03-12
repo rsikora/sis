@@ -22,6 +22,6 @@ public class DefaultRoundingStrategy implements RoundingStrategy {
     public Rounding totalSumRoundingFrom(Amount amount) {
         BigDecimal rounded = amount.value().setScale(0, ROUNDING_MODE);
         BigDecimal rounding = rounded.subtract(amount.value());
-        return new Rounding(Amount.from(rounding));
+        return new Rounding(rounding);
     }
 }

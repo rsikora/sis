@@ -1,9 +1,7 @@
-package cz.snet.domain.model.invoice.tax;
+package cz.snet.domain.model.invoice.amount.tax;
 
 import cz.snet.domain.model.invoice.amount.Amount;
-import cz.snet.domain.model.invoice.amount.rounding.DefaultRoundingStrategy;
 import cz.snet.domain.model.invoice.amount.rounding.RoundingStrategy;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -22,61 +20,62 @@ public class TaxTest {
     private static final Amount NET_AMOUNT = Amount.from("100.00");
     private static final int PCT = 1;
     private static final Amount TAX_AMOUNT = Amount.from("1.00");
-    private static final Tax TAX = new Tax(NET_AMOUNT, PCT, TAX_AMOUNT);
+    private static final BigDecimal TAX_VALUE = new BigDecimal("1.00");
+    private static final Tax TAX = new Tax(NET_AMOUNT, PCT, TAX_VALUE);
 
     @Test
     public void testConstructor() throws Exception {
         assertThat(TAX.net(), is(NET_AMOUNT));
         assertThat(TAX.pct(), is(PCT));
-        assertThat(TAX.value(), is(TAX_AMOUNT));
+        assertThat(TAX.value(), is(TAX_VALUE));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvariantIsNotSatisfiedFromLeftBound() throws Exception {
-        new Tax(NET_AMOUNT, PCT, Amount.from("0.98"));
+        new Tax(NET_AMOUNT, PCT, new BigDecimal("0.98"));
     }
 
     @Test
     public void testInvariantIsSatisfiedFromLeftBound() throws Exception {
-        Tax tax = new Tax(NET_AMOUNT, PCT, Amount.from("0.99"));
+        Tax tax = new Tax(NET_AMOUNT, PCT, new BigDecimal("0.99"));
         assertThat(tax, is(not(nullValue())));
     }
 
     @Test
     public void testInvariantIsSatisfiedFromRightBound() throws Exception {
-        Tax tax = new Tax(NET_AMOUNT, PCT, Amount.from("1.01"));
+        Tax tax = new Tax(NET_AMOUNT, PCT, new BigDecimal("1.01"));
         assertThat(tax, is(not(nullValue())));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvariantIsNotSatisfiedFromRightBound() throws Exception {
-        new Tax(NET_AMOUNT, PCT, Amount.from("1.02"));
+        new Tax(NET_AMOUNT, PCT, new BigDecimal("1.02"));
     }
 
     @Test
     public void testAdd() throws Exception {
         Tax otherTax = TAX.add(TAX);
         assertThat(otherTax.net(), is(Amount.from("200.00")));
-        assertThat(otherTax.value(), is(Amount.from("2.00")));
+        assertThat(otherTax.value(), is(new BigDecimal("2.00")));
         assertThat(otherTax.pct(), is(PCT));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void failWhenAddingWithDifferentPct() throws Exception {
-        Tax otherTax = new Tax(NET_AMOUNT, 2, Amount.from("2.00"));
+        Tax otherTax = new Tax(NET_AMOUNT, 2, new BigDecimal("2.00"));
         TAX.add(otherTax);
     }
 
     @Test
     public void testEqualsAndHashcode() throws Exception {
-        Tax otherTax = new Tax(NET_AMOUNT, PCT, TAX_AMOUNT);
+        Tax otherTax = new Tax(NET_AMOUNT, PCT, TAX_VALUE);
         assertThat(TAX.equals(otherTax), is(true));
         assertThat(TAX.hashCode(), is(otherTax.hashCode()));
     }
 
     @Test
     public void testNotEquals() throws Exception {
-        Tax otherTax = new Tax(NET_AMOUNT, 2, Amount.from("2.00"));
+        Tax otherTax = new Tax(NET_AMOUNT, 2, new BigDecimal("2.00"));
         assertThat(TAX.equals(otherTax), is(false));
     }
 
@@ -102,6 +101,6 @@ public class TaxTest {
         when(rounding.amountFrom(new BigDecimal("1.0000"))).thenReturn(TAX_AMOUNT);
 
         Tax tax = Tax.from(NET_AMOUNT, PCT, rounding);
-        assertThat(tax.value(), is(TAX_AMOUNT));
+        assertThat(tax.value(), is(TAX_VALUE));
     }
 }

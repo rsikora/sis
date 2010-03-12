@@ -1,4 +1,4 @@
-package cz.snet.domain.model.invoice.tax;
+package cz.snet.domain.model.invoice.amount.tax;
 
 import cz.snet.domain.model.invoice.amount.Amount;
 

@@ -1,5 +1,8 @@
 .gradle
+.idea
 *.old
+*.iml
+*.eml
 build
 modules/sis-domain/build
 modules/sis-shared/build
