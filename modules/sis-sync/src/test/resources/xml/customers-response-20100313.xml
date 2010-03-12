@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<rsp:responsePack version="1.0" id="2010-03-08T10:37:25.152" state="ok" note="" programVersion="9403.5 E1 (17.2.2010)" xmlns:rsp="http://www.stormware.cz/schema/response.xsd" xmlns:rdc="http://www.stormware.cz/schema/documentresponse.xsd" xmlns:typ="http://www.stormware.cz/schema/type.xsd" xmlns:lst="http://www.stormware.cz/schema/list.xsd" xmlns:acu="http://www.stormware.cz/schema/accountingunit.xsd" xmlns:inv="http://www.stormware.cz/schema/invoice.xsd" xmlns:vch="http://www.stormware.cz/schema/voucher.xsd" xmlns:int="http://www.stormware.cz/schema/intDoc.xsd" xmlns:stk="http://www.stormware.cz/schema/stock.xsd" xmlns:ord="http://www.stormware.cz/schema/order.xsd" xmlns:ofr="http://www.stormware.cz/schema/offer.xsd" xmlns:enq="http://www.stormware.cz/schema/enquiry.xsd" xmlns:vyd="http://www.stormware.cz/schema/vydejka.xsd" xmlns:pri="http://www.stormware.cz/schema/prijemka.xsd" xmlns:bal="http://www.stormware.cz/schema/balance.xsd" xmlns:pre="http://www.stormware.cz/schema/prevodka.xsd" xmlns:vyr="http://www.stormware.cz/schema/vyroba.xsd" xmlns:pro="http://www.stormware.cz/schema/prodejka.xsd" xmlns:con="http://www.stormware.cz/schema/contract.xsd" xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd" xmlns:prm="http://www.stormware.cz/schema/parameter.xsd" xmlns:lst2="http://www.stormware.cz/schema/list_2.xsd" xmlns:ctg="http://www.stormware.cz/schema/category.xsd" xmlns:ipm="http://www.stormware.cz/schema/intParam.xsd">
+<rsp:responsePackItem version="1.0" id="2010-03-08T10:37:25.152_0000000000_6237" state="ok">
+	<adb:addressbookResponse version="1.5" state="ok">
+		<rdc:producedDetails>
+			<rdc:id>9226</rdc:id>
+			<rdc:code>Nieslanik Jan</rdc:code>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+<rsp:responsePackItem version="1.0" id="2010-03-08T10:37:25.152_0000000001_5680" state="ok">
+	<adb:addressbookResponse version="1.5" state="ok">
+		<rdc:producedDetails>
+			<rdc:id>8707</rdc:id>
+			<rdc:code>Wawreczka David</rdc:code>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+<rsp:responsePackItem version="1.0" id="2010-03-08T10:37:25.152_0000000002_5250" state="ok">
+	<adb:addressbookResponse version="1.5" state="ok">
+		<rdc:producedDetails>
+			<rdc:id>8283</rdc:id>
+			<rdc:code>Veselková Naděžda</rdc:code>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+<rsp:responsePackItem version="1.0" id="2010-03-08T10:37:25.152_0000000003_5483" state="ok">
+	<adb:addressbookResponse version="1.5" state="ok">
+		<rdc:producedDetails>
+			<rdc:id>8526</rdc:id>
+			<rdc:code>Veselka Pavel</rdc:code>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+</rsp:responsePack>

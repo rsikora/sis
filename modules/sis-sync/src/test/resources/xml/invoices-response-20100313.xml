@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<rsp:responsePack version="1.0" id="2010-03-10T17:02:48.593" state="ok" note="" programVersion="9403.5 E1 (17.2.2010)" xmlns:rsp="http://www.stormware.cz/schema/response.xsd" xmlns:rdc="http://www.stormware.cz/schema/documentresponse.xsd" xmlns:typ="http://www.stormware.cz/schema/type.xsd" xmlns:lst="http://www.stormware.cz/schema/list.xsd" xmlns:acu="http://www.stormware.cz/schema/accountingunit.xsd" xmlns:inv="http://www.stormware.cz/schema/invoice.xsd" xmlns:vch="http://www.stormware.cz/schema/voucher.xsd" xmlns:int="http://www.stormware.cz/schema/intDoc.xsd" xmlns:stk="http://www.stormware.cz/schema/stock.xsd" xmlns:ord="http://www.stormware.cz/schema/order.xsd" xmlns:ofr="http://www.stormware.cz/schema/offer.xsd" xmlns:enq="http://www.stormware.cz/schema/enquiry.xsd" xmlns:vyd="http://www.stormware.cz/schema/vydejka.xsd" xmlns:pri="http://www.stormware.cz/schema/prijemka.xsd" xmlns:bal="http://www.stormware.cz/schema/balance.xsd" xmlns:pre="http://www.stormware.cz/schema/prevodka.xsd" xmlns:vyr="http://www.stormware.cz/schema/vyroba.xsd" xmlns:pro="http://www.stormware.cz/schema/prodejka.xsd" xmlns:con="http://www.stormware.cz/schema/contract.xsd" xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd" xmlns:prm="http://www.stormware.cz/schema/parameter.xsd" xmlns:lst2="http://www.stormware.cz/schema/list_2.xsd" xmlns:ctg="http://www.stormware.cz/schema/category.xsd" xmlns:ipm="http://www.stormware.cz/schema/intParam.xsd">
+  <rsp:responsePackItem version="1.0" id="2010-03-10T17:02:48.593_0000000000_134409" state="ok">
+    <inv:invoiceResponse version="1.3" state="ok">
+      <rdc:importDetails>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum není z účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[1]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum může být nejvýše 31.12.2009.
+
+Tip: Pokud chcete zadat doklad z počátku dalšího období,
+nastavte Účetnictví/Uzávěrka/Účtování na přelomu účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[1]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+      </rdc:importDetails>
+      <rdc:producedDetails>
+        <rdc:id>60925</rdc:id>
+        <rdc:number>2010008197</rdc:number>
+      </rdc:producedDetails>
+    </inv:invoiceResponse>
+  </rsp:responsePackItem>
+  <rsp:responsePackItem version="1.0" id="2010-03-10T17:02:48.593_0000000001_134410" state="ok">
+    <inv:invoiceResponse version="1.3" state="ok">
+      <rdc:importDetails>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum není z účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[2]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum může být nejvýše 31.12.2009.
+
+Tip: Pokud chcete zadat doklad z počátku dalšího období,
+nastavte Účetnictví/Uzávěrka/Účtování na přelomu účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[2]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+      </rdc:importDetails>
+      <rdc:producedDetails>
+        <rdc:id>60926</rdc:id>
+        <rdc:number>2010008198</rdc:number>
+      </rdc:producedDetails>
+    </inv:invoiceResponse>
+  </rsp:responsePackItem>
+  <rsp:responsePackItem version="1.0" id="2010-03-10T17:02:48.593_0000000002_134411" state="ok">
+    <inv:invoiceResponse version="1.3" state="ok">
+      <rdc:importDetails>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum není z účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[3]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum může být nejvýše 31.12.2009.
+
+Tip: Pokud chcete zadat doklad z počátku dalšího období,
+nastavte Účetnictví/Uzávěrka/Účtování na přelomu účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[3]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+      </rdc:importDetails>
+      <rdc:producedDetails>
+        <rdc:id>60927</rdc:id>
+        <rdc:number>2010008199</rdc:number>
+      </rdc:producedDetails>
+    </inv:invoiceResponse>
+  </rsp:responsePackItem>
+  <rsp:responsePackItem version="1.0" id="2010-03-10T17:02:48.593_0000000003_134412" state="ok">
+    <inv:invoiceResponse version="1.3" state="ok">
+      <rdc:importDetails>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum není z účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[4]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum může být nejvýše 31.12.2009.
+
+Tip: Pokud chcete zadat doklad z počátku dalšího období,
+nastavte Účetnictví/Uzávěrka/Účtování na přelomu účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[4]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+      </rdc:importDetails>
+      <rdc:producedDetails>
+        <rdc:id>60928</rdc:id>
+        <rdc:number>2010008200</rdc:number>
+      </rdc:producedDetails>
+    </inv:invoiceResponse>
+  </rsp:responsePackItem>
+  <rsp:responsePackItem version="1.0" id="2010-03-10T17:02:48.593_0000000004_134413" state="ok">
+    <inv:invoiceResponse version="1.3" state="ok">
+      <rdc:importDetails>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum není z účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[5]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+        <rdc:detail>
+          <rdc:state>warning</rdc:state>
+          <rdc:errno>606</rdc:errno>
+          <rdc:note>Datum může být nejvýše 31.12.2009.
+
+Tip: Pokud chcete zadat doklad z počátku dalšího období,
+nastavte Účetnictví/Uzávěrka/Účtování na přelomu účetního období.</rdc:note>
+          <rdc:XPath>dat:dataPack/dat:dataPackItem[5]/inv:invoice/inv:invoiceHeader/inv:date</rdc:XPath>
+          <rdc:valueRequested>08.03.2010</rdc:valueRequested>
+          <rdc:valueProduced>08.03.2010</rdc:valueProduced>
+        </rdc:detail>
+      </rdc:importDetails>
+      <rdc:producedDetails>
+        <rdc:id>60929</rdc:id>
+        <rdc:number>2010008201</rdc:number>
+      </rdc:producedDetails>
+    </inv:invoiceResponse>
+  </rsp:responsePackItem>
+</rsp:responsePack>

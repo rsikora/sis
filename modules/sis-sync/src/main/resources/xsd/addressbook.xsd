@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="Windows-1250" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns:typ="http://www.stormware.cz/schema/type.xsd"
+			xmlns:rdc="http://www.stormware.cz/schema/documentresponse.xsd" 
+			xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
+			xmlns="http://www.stormware.cz/schema/addressbook.xsd" 
+			targetNamespace="http://www.stormware.cz/schema/addressbook.xsd"
+			elementFormDefault="qualified">
+			
+<xsd:import namespace="http://www.stormware.cz/schema/type.xsd" schemaLocation="type.xsd" />
+<xsd:import namespace="http://www.stormware.cz/schema/documentresponse.xsd" schemaLocation="documentresponse.xsd" />
+	
+	<!-- **************************************************************************
+	root element must be <addressbook>
+	************************************************************************** -->
+
+<!-- REQUEST -->
+
+	<xsd:element name="addressbook" type="adb:addressbookType" />
+
+	<!-- **************************************************************************
+		addressbook
+	 ************************************************************************** -->
+	 
+	<xsd:complexType name="addressbookType">
+		<xsd:sequence>
+			<xsd:element name="addressbookHeader" type="adb:addressbookHeaderType" />
+			<xsd:element name="addressbookAccount" type="adb:addressbookAccountType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="version" type="adb:adbVersionType" use="required" />
+	</xsd:complexType>
+	
+	<xsd:simpleType name="adbVersionType">
+	<xsd:annotation>
+		<xsd:documentation>Verze, které jsou dostupné k tomuto dokladu. Podrobnosti k jednotlivým verzím najdete na www.stormware.cz/xml</xsd:documentation>
+	</xsd:annotation>
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="1.0"/>
+		<xsd:enumeration value="1.1"/>
+		<xsd:enumeration value="1.3"/>
+		<xsd:enumeration value="1.4"/>
+		<xsd:enumeration value="1.5"/>
+	</xsd:restriction>
+</xsd:simpleType>
+	
+	<xsd:complexType name="addressbookHeaderType">
+		<xsd:sequence>
+			<xsd:element name="id" type="typ:idType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ID adresy. Používá se při requestu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element name="identity" type="typ:address" minOccurs="0">
+			<xsd:annotation>
+					<xsd:documentation>Základní údaje</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="region" type="typ:string32" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Název kraje.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="phone" type="typ:string40" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Telefon.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="mobil" type="typ:string24" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Mobil.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fax" type="typ:string24" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Fax.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="email" type="typ:string64" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Email.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="web" type="typ:string32" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Adresa www stránek.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="adGroup" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Skupiny.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="255"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="adKey" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Klíče.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="255"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="credit" type="typ:currencyType" minOccurs="0" default="0">        
+				<xsd:annotation>
+					<xsd:documentation>Kredit, tolerovaná výše pohledávek odběratele.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="priceIDS" type="typ:string10" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Cenová hladina odběratele.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="maturity" type="xsd:short" minOccurs="0" default="0">
+			  <xsd:annotation>
+					<xsd:documentation>Splatno. Počet dnů splatnosti faktur. Při vložení adresy 
+            do faktury se nastaví datum splatnosti přičtením zde uvedeného počtu dnů k datu vystavení faktury.
+          </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="paymentType" type="typ:paymentType" minOccurs="0">
+  			<xsd:annotation>
+  				<xsd:documentation>Forma úhrady.</xsd:documentation>
+  			</xsd:annotation>
+		  </xsd:element>
+			<xsd:element name="agreement" type="typ:string12" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Číslo obchodní smlouvy (nesmí být povoleno v Globálním nastavení - Číslování zákazníků). Od verze 1.5.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element name="number" type="typ:numberType" minOccurs="0">
+  			<xsd:annotation>
+  				<xsd:documentation>Číslo dodavatele/odběratele dle zvolené číselné řady (musí být povoleno v Globálním nastavení - Číslování zákazníků).</xsd:documentation>
+  			</xsd:annotation>
+		  </xsd:element>
+			<xsd:element name="ost1" type="typ:string8" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Ostatní.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ost2" type="typ:string8" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Ostatní. Používá se také u kontaktní osoby.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Následující elementy se používá se jen u kontaktní osoby. -->
+			<xsd:element name="function" type="typ:string32" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Název funkce. Používá se jen u kontaktní osoby.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+      <xsd:element name="personalIdentificationNumber" type="typ:string11" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Rodné číslo. Používá se jen u kontaktní osoby.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+      <xsd:element name="salutation" type="typ:string32" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Oslovení pro použití v korespondenci. Používá se jen u kontaktní osoby.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+      <xsd:element name="sex" type="typ:sexType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Pohlaví. Používá se jen u kontaktní osoby.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element name="dateOfBirth" type="xsd:date" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Datum narození. Používá se jen u kontaktní osoby.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Konec - kontaktní osoby -->
+			<xsd:element name="p1" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Klíč P1 / Dodavatel.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="p2" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Klíč P2 / Odběratel.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="p3" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Klíč P3.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="p4" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Klíč P4.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="p5" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Klíč P5.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="p6" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Klíč P6.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="message" type="typ:string64" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Zpráva.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="note" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Poznámka.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="intNote" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Interní poznámka.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="duplicityFields" type="adb:duplicityFieldsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Seznam polí pro kontrolu duplicit v adresáři.</xsd:documentation>
+				</xsd:annotation>				
+			</xsd:element>
+			<xsd:element name="centre" type="typ:refType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Středisko činnosti. Od verze 1.5</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="activity" type="typ:refType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Činnost. Od verze 1.5</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="contract" type="typ:refType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Zakázka. Od verze 1.5</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="parameter" type="typ:parameterDocType" minOccurs="0" maxOccurs="64">
+				<xsd:annotation>
+					<xsd:documentation>Volitelný parametr.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="refAddress" type="typ:refAddressType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Odkaz kontaktní osoby na hlavní adresu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="duplicityFieldsType">
+		<xsd:annotation>
+			<xsd:documentation>Pokud je u atributu nastavena hodnota actualize="false", proběhne kontrola duplicity podle následujících polí. Pokud 
+					bude nalezena duplicita, doklad se nenaimportuje.
+					Pokud je nastavewna hodnota actualize="true", provede se aktualizace záznamu v adresáři dle zadaných hodnot v XML. Podle následující 
+					záznamů se vyfiltruje záznam pro úpravu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="id" type="typ:idType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Vybere záznam dle zadaného ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="extId" type="typ:extIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Vybere záznam dle zadaného externího identifikátoru.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fieldFirma" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Kontrola duplicity v poli Firma.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fieldJmeno" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Kontrola duplicity v poli Jméno.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fieldObec" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Kontrola duplicity v poli Obec.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fieldPSC" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Kontrola duplicity v poli PSČ.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fieldICO" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Kontrola duplicity v poli IČ.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fieldDIC" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Kontrola duplicity v poli DIČ.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fieldNumber" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Kontrola duplicity v poli Číslo.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:all>
+		<xsd:attribute name="actualize" type="typ:boolean" default="false"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="addressbookAccountType">
+		<xsd:sequence>
+			<xsd:element name="accountItem" type="adb:accountItemType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="accountItemType">
+		<xsd:sequence>
+			<xsd:element name="accountNumber" type="typ:string34">
+				<xsd:annotation>
+					<xsd:documentation>Číslo bankovního účtu.</xsd:documentation>
+				</xsd:annotation>		
+			</xsd:element>
+			<xsd:element name="symSpec" type="typ:symSpecType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Specificky symbol.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="bankCode" type="typ:bankCodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Kód banky.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element name="defaultAccount" type="typ:boolean" minOccurs="0" default="false">
+				<xsd:annotation>
+					<xsd:documentation>Výchozí účet.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<!-- RESPONSE -->
+
+<xsd:element name="addressbookResponse" type="adb:addressbookResponseType"/>
+
+<xsd:complexType name="addressbookResponseType">
+	<xsd:complexContent>
+		<xsd:extension  base="rdc:documentResponseType"/>
+	</xsd:complexContent>
+</xsd:complexType>
+	
+</xsd:schema>
