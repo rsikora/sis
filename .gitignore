@@ -1,2 +1,6 @@
 .gradle
 *.old
+build
+modules/sis-domain/build
+modules/sis-shared/build
+modules/sis-sync/build
