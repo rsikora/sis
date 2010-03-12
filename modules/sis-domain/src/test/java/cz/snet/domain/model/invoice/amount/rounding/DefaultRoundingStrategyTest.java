@@ -50,11 +50,11 @@ public class DefaultRoundingStrategyTest {
     public void testIntRoundingFor(RoundingFixture fixture) throws Exception {
         // pick only rounding() fixtures
         assumeTrue(fixture.param1.toString().equals(ONE));
-        log.debug("rounding() " + fixture.param2 + " => " + fixture.result);
+        log.debug("totalSumRoundingFrom() " + fixture.param2 + " => " + fixture.result);
         Amount amount = Amount.from(fixture.param2);
-        IntRounding intRounding = rounding.intRoundingFor(amount);
-        log.debug(intRounding);
-        assertThat(intRounding.value().add(amount).value(), is(fixture.result));
+        Rounding rounding = DefaultRoundingStrategyTest.rounding.totalSumRoundingFrom(amount);
+        log.debug(rounding);
+        assertThat(rounding.value().add(amount).value(), is(fixture.result));
     }
 
 }

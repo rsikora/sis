@@ -11,5 +11,5 @@ import java.math.BigDecimal;
  */
 public interface RoundingStrategy {
     Amount amountFrom(BigDecimal value);
-    IntRounding intRoundingFor(Amount amount);
+    Rounding totalSumRoundingFrom(Amount amount);
 }

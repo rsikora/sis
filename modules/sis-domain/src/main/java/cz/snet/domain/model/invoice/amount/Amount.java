@@ -11,7 +11,7 @@ public class Amount implements ValueObject<Amount> {
 
     private Amount(BigDecimal value) {
         if (isRoundingNeededFor(value))
-            throw new IllegalArgumentException("IntRounding is needed for " + value);
+            throw new IllegalArgumentException("Rounding is needed for " + value);
         this.value = value.setScale(2, RoundingMode.UNNECESSARY);
     }
 
@@ -27,6 +27,7 @@ public class Amount implements ValueObject<Amount> {
         return rounding.amountFrom(value);
     }
 
+    @SuppressWarnings({"ResultOfMethodCallIgnored"})
     public static boolean isRoundingNeededFor(BigDecimal value) {
         try {
             value.setScale(2, RoundingMode.UNNECESSARY);
@@ -53,8 +54,7 @@ public class Amount implements ValueObject<Amount> {
         if (this == o) return true;
         if (!(o instanceof Amount)) return false;
         Amount amount = (Amount) o;
-        if (!value.equals(amount.value)) return false;
-        return true;
+        return value.equals(amount.value);
     }
 
     @Override

@@ -19,8 +19,9 @@ public class DefaultRoundingStrategy implements RoundingStrategy {
     }
 
     @Override
-    public IntRounding intRoundingFor(Amount amount) {
+    public Rounding totalSumRoundingFrom(Amount amount) {
         BigDecimal rounded = amount.value().setScale(0, ROUNDING_MODE);
-        return new IntRounding(amount, Amount.from(rounded));
+        BigDecimal rounding = rounded.subtract(amount.value());
+        return new Rounding(Amount.from(rounding));
     }
 }
