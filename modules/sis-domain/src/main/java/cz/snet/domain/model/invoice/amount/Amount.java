@@ -24,7 +24,7 @@ public class Amount implements ValueObject<Amount> {
     }
 
     public static Amount from(BigDecimal value, RoundingStrategy rounding) {
-        return rounding.amountFrom(value);
+        return new Amount(rounding.round(value));
     }
 
     @SuppressWarnings({"ResultOfMethodCallIgnored"})
@@ -36,7 +36,7 @@ public class Amount implements ValueObject<Amount> {
         }
         return false;
     }
-    
+
     public BigDecimal value() {
         return value;
     }

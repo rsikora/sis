@@ -19,7 +19,6 @@ import static org.mockito.Mockito.when;
 public class TaxTest {
     private static final Amount NET_AMOUNT = Amount.from("100.00");
     private static final int PCT = 1;
-    private static final Amount TAX_AMOUNT = Amount.from("1.00");
     private static final BigDecimal TAX_VALUE = new BigDecimal("1.00");
     private static final Tax TAX = new Tax(NET_AMOUNT, PCT, TAX_VALUE);
 
@@ -67,19 +66,6 @@ public class TaxTest {
     }
 
     @Test
-    public void testEqualsAndHashcode() throws Exception {
-        Tax otherTax = new Tax(NET_AMOUNT, PCT, TAX_VALUE);
-        assertThat(TAX.equals(otherTax), is(true));
-        assertThat(TAX.hashCode(), is(otherTax.hashCode()));
-    }
-
-    @Test
-    public void testNotEquals() throws Exception {
-        Tax otherTax = new Tax(NET_AMOUNT, 2, new BigDecimal("2.00"));
-        assertThat(TAX.equals(otherTax), is(false));
-    }
-
-    @Test
     public void testToString() throws Exception {
         assertThat(TAX.toString(), is("Tax{net=100.00, pct=1, value=1.00}"));
     }
@@ -98,7 +84,7 @@ public class TaxTest {
     public void testFrom() throws Exception {
         RoundingStrategy rounding = mock(RoundingStrategy.class);
         any(BigDecimal.class);
-        when(rounding.amountFrom(new BigDecimal("1.0000"))).thenReturn(TAX_AMOUNT);
+        when(rounding.round(new BigDecimal("1.0000"))).thenReturn(TAX_VALUE);
 
         Tax tax = Tax.from(NET_AMOUNT, PCT, rounding);
         assertThat(tax.value(), is(TAX_VALUE));

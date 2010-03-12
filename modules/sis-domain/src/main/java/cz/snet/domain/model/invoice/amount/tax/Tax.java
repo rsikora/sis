@@ -15,9 +15,23 @@ public class Tax extends Amount {
     private final Amount net;
     private final int pct;
 
+    protected Tax(Amount net, int pct, BigDecimal value) {
+        super(value);
+        this.net = net;
+        this.pct = pct;
+        if (invariantIsNotSatisfied())
+            throw new IllegalArgumentException("Tax invariant { tax = net * (pct/100) } is not satisfied by " + toString());
+    }
+
+    private boolean invariantIsNotSatisfied() {
+        BigDecimal exactTax = net.value().multiply(BigDecimal.valueOf(pct, 2));
+        BigDecimal delta = value.subtract(exactTax).abs();
+        return MAX_ROUNDING.compareTo(delta) < 0;
+    }
+
     public static Tax from(final Amount net, final int pct, final RoundingStrategy rounding) {
-        Amount taxValue = rounding.amountFrom(taxFrom(net, pct));
-        return new Tax(net, pct, taxValue.value());
+        BigDecimal tax = rounding.round(taxFrom(net, pct));
+        return new Tax(net, pct, tax);
     }
 
     protected static BigDecimal taxFrom(Amount amount, int pct) {
@@ -26,20 +40,6 @@ public class Tax extends Amount {
 
     protected static BigDecimal multiplierFrom(int pct) {
         return BigDecimal.valueOf(pct, 2);
-    }
-
-    protected Tax(Amount net, int pct, BigDecimal value) {
-        super(value);
-        this.net = net;
-        this.pct = pct;
-        if (invariantIsNotSatisfied())
-            throw new IllegalArgumentException("Tax invariant { result = net * (pct/100) } is not satisfied by " + toString());
-    }
-
-    protected boolean invariantIsNotSatisfied() {
-        BigDecimal exactTax = net.value().multiply(BigDecimal.valueOf(pct, 2));
-        BigDecimal delta = value.subtract(exactTax).abs();
-        return MAX_ROUNDING.compareTo(delta) < 0;
     }
 
     public Tax add(Tax other) {

@@ -63,8 +63,9 @@ public class AmountTest {
     @Test
     public void testSubtract() throws Exception {
         assertThat(AMOUNT.subtract(AMOUNT).value(), is(new BigDecimal("0.00")));
-        
+
     }
+
     @Test
     public void testToString() throws Exception {
         assertThat(AMOUNT.toString(), is("1.00"));
@@ -94,8 +95,9 @@ public class AmountTest {
     public void testFromWithRounding() throws Exception {
         RoundingStrategy rounding = mock(RoundingStrategy.class);
         BigDecimal value = new BigDecimal("1.001");
-        when(rounding.amountFrom(value)).thenReturn(AMOUNT);
-        
+        BigDecimal rounded = new BigDecimal("1.00");
+        when(rounding.round(value)).thenReturn(rounded);
+
         assertThat(Amount.from(value, rounding), is(AMOUNT));
     }
 
