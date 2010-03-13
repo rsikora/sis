@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:typ="http://www.stormware.cz/schema/type.xsd"
+			xmlns:lst="http://www.stormware.cz/schema/list.xsd"
+			xmlns:stk="http://www.stormware.cz/schema/stock.xsd"
+			xmlns:eStk="http://www.stormware.cz/schema/list_stock_1.2.xsd"
+			xmlns="http://www.stormware.cz/schema/list_stock_1.2.xsd"
+			targetNamespace="http://www.stormware.cz/schema/list_stock_1.2.xsd"
+			elementFormDefault="qualified"
+>
+
+<xsd:import namespace="http://www.stormware.cz/schema/type.xsd" schemaLocation="type.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/list.xsd" schemaLocation="list.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/stock.xsd" schemaLocation="stock.xsd"/>
+<!-- **************************************************************************
+		root element
+	 ************************************************************************** -->
+
+<!-- REQUEST -->
+<xsd:element name="listStockRequest" type="eStk:listRequestStockType"/>
+
+<xsd:complexType name="listRequestStockType">
+	<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+		<xsd:element name="requestStock" type="eStk:requestStockType">
+			<xsd:annotation>
+				<xsd:documentation>Atributy určují filtr pro export zásob. Pokud není zadán žádný filtr, vyexportují se všechny zásoby.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:sequence>
+	<xsd:attribute name="version" type="eStk:listRequestStockVerType" use="required"/>
+	<xsd:attribute name="stockVersion" type="stk:stkVersionType" use="required">
+		<xsd:annotation>
+			<xsd:documentation>Poadovaná verze dokladu.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:attribute>
+</xsd:complexType>
+
+<xsd:simpleType name="listRequestStockVerType">
+	<xsd:annotation>
+		<xsd:documentation>Verze, které jsou dostupné k tomuto dokladu. Podrobnosti k jednotlivým verzím najdete na www.stormware.cz/xml</xsd:documentation>
+	</xsd:annotation>
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="1.2"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="requestStockType">
+	<xsd:sequence>
+		<xsd:element name="filter" type="eStk:filterStockType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Seznam polí podle kterých se bude filtrovat.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="userFilterName" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Identifikátor uživatelského filtru v požadované agendě, který má být použit pro filtraci záznamů.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="filterStockType">
+	<xsd:sequence>
+		<xsd:element name="stock" type="typ:refType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>ID, IDS (kód) zásoby.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="storage" type="typ:refTypeStorage" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>ID, název členění.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="store" type="typ:refType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>ID, název skladu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="internet" type="typ:boolean" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Hodnota Internet je na zásobě  nastavena.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>
+
+</xsd:schema>

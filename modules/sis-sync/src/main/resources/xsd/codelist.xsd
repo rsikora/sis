@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:lst="http://www.stormware.cz/schema/list.xsd"
+			xmlns:cod="http://www.stormware.cz/schema/codelist.xsd"
+			xmlns="http://www.stormware.cz/schema/codelist.xsd"
+			targetNamespace="http://www.stormware.cz/schema/codelist.xsd"
+			elementFormDefault="qualified"
+>
+
+<xsd:import namespace="http://www.stormware.cz/schema/type.xsd" schemaLocation="type.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/list.xsd" schemaLocation="list.xsd"/>
+
+<!-- **************************************************************************
+		root element must be <codeListPack>
+	 ************************************************************************** -->
+
+<xsd:element name="codeListPack" type="codeListPackType"/>
+
+<!-- **************************************************************************
+		package
+	 ************************************************************************** -->
+
+<xsd:complexType name="codeListPackType">
+	<xsd:choice minOccurs="1" maxOccurs="1">
+		<xsd:element name="codeListPackItem" type="cod:codeListPackItemType">
+			<xsd:unique name="noDuplicityId">
+				<xsd:selector xpath="lst:*/lst:*"/>
+				<xsd:field xpath="@id"/>
+			</xsd:unique>
+			<xsd:unique name="noDuplicityCode">
+				<xsd:selector xpath="lst:*/lst:*"/>
+				<xsd:field xpath="@code"/>
+			</xsd:unique>
+		</xsd:element>
+	</xsd:choice>
+  	<xsd:attribute name="version" use="required">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="1.0"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+  	</xsd:attribute>
+</xsd:complexType>
+
+<xsd:complexType name="codeListPackItemType">
+	<xsd:choice minOccurs="1" maxOccurs="1">
+		<xsd:element ref="lst:listCentre"/>
+		<xsd:element ref="lst:listActivity"/>
+		<xsd:element ref="lst:listContract"/>
+		<xsd:element ref="lst:listCash"/>
+		<xsd:element ref="lst:listAccountingSingleEntry"/>
+		<xsd:element ref="lst:listAccountingDoubleEntry"/>
+		<xsd:element ref="lst:listAccount"/>
+		<xsd:element ref="lst:listStock"/>
+	</xsd:choice>
+  	<xsd:attribute name="version" use="required">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="1.0"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+  	</xsd:attribute>
+</xsd:complexType>
+
+</xsd:schema>

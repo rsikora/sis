@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:typ="http://www.stormware.cz/schema/type.xsd"
+			xmlns:rdc="http://www.stormware.cz/schema/documentresponse.xsd"
+			xmlns:pre="http://www.stormware.cz/schema/prevodka.xsd"
+			xmlns="http://www.stormware.cz/schema/prevodka.xsd"
+			targetNamespace="http://www.stormware.cz/schema/prevodka.xsd"
+			elementFormDefault="qualified"
+>
+
+<xsd:import namespace="http://www.stormware.cz/schema/type.xsd" 					schemaLocation="type.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/documentresponse.xsd" 	schemaLocation="documentresponse.xsd"/>
+
+<!-- **************************************************************************
+		root element must be <prevodka>
+	 ************************************************************************** -->
+
+<!-- REQUEST -->
+
+<xsd:element name="prevodka" type="pre:prevodkaType"/>
+
+<!-- **************************************************************************
+		prevodka
+	 ************************************************************************** -->
+
+<xsd:complexType name="prevodkaType">
+	<xsd:sequence>
+		<xsd:element name="prevodkaHeader" type="pre:prevodkaHeaderType"/>
+	 	<xsd:element name="prevodkaDetail" type="pre:prevodkaDetailType" minOccurs="0"/>
+	</xsd:sequence>
+	<xsd:attribute name="version" type="pre:preVersionType" use="required"/>
+</xsd:complexType>
+
+<xsd:simpleType name="preVersionType">
+	<xsd:annotation>
+		<xsd:documentation>Verze, které jsou dostupné k tomuto dokladu. Podrobnosti k jednotlivým verzím najdete na www.stormware.cz/xml</xsd:documentation>
+	</xsd:annotation>
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="1.0"/>
+		<xsd:enumeration value="1.1"/>
+		<xsd:enumeration value="1.2"/>
+		<xsd:enumeration value="1.3"/>
+		<xsd:enumeration value="1.5"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="prevodkaHeaderType">
+	<xsd:sequence>
+		<xsd:element name="id" type="typ:idType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>ID záznamu. Používá se při requestu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="number" type="typ:numberType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Evidenční číslo dokladu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="date" type="xsd:date">
+			<xsd:annotation>
+				<xsd:documentation>Datum vystavení dokladu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="symPar" type="typ:symVarType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Párovací symbol.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="store" type="typ:refType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Sklad.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="text" type="typ:string48">
+			<xsd:annotation>
+				<xsd:documentation>Text dokladu</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="partnerIdentity" type="typ:address" minOccurs="0">
+		  <xsd:annotation>
+				<xsd:documentation>Zákazníkova adresa</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="centreSource" type="typ:refType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Zdrojové středisko.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="centreDestination" type="typ:refType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Cílové středisko.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="activity" type="typ:refType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Činnost.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="contract" type="typ:refType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Zakázka.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="note" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Poznámka.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="intNote" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Interní poznámka.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="parameter" type="typ:parameterDocType" minOccurs="0" maxOccurs="64">
+			<xsd:annotation>
+				<xsd:documentation>Volitelný parametr.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="prevodkaDetailType">
+	<xsd:sequence>
+		<xsd:element name="prevodkaItem" type="pre:prevodkaItemType" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="prevodkaItemType">
+	<xsd:sequence>
+	  	<xsd:element name="quantity" type="xsd:float" minOccurs="0">
+	  		<xsd:annotation>
+	  			<xsd:documentation>Množství.</xsd:documentation>
+	  		</xsd:annotation>
+	  	</xsd:element>
+		<xsd:element name="stockItem" type="typ:stockItemType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Údaje potřebné k nalezení skladové zásoby vložené do položky. Pokud zde tento element není, jedná se o textovou položku.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>
+
+<!-- RESPONSE -->
+
+<xsd:element name="prevodkaResponse" type="pre:prevodkaResponseType"/>
+
+<xsd:complexType name="prevodkaResponseType">
+	<xsd:complexContent>
+		<xsd:extension  base="rdc:documentResponseType"/>
+	</xsd:complexContent>
+</xsd:complexType>
+
+</xsd:schema>

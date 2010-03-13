@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:typ="http://www.stormware.cz/schema/type.xsd"
+			xmlns:lst="http://www.stormware.cz/schema/list.xsd"
+			xmlns:stk="http://www.stormware.cz/schema/stock.xsd"
+			xmlns:eStk="http://www.stormware.cz/schema/list_stock_1.1.xsd"
+			xmlns="http://www.stormware.cz/schema/list_stock_1.1.xsd"
+			targetNamespace="http://www.stormware.cz/schema/list_stock_1.1.xsd"
+			elementFormDefault="qualified"
+>
+
+<xsd:import namespace="http://www.stormware.cz/schema/type.xsd" schemaLocation="type.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/list.xsd" schemaLocation="list.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/stock.xsd" schemaLocation="stock.xsd"/>
+<!-- **************************************************************************
+		root element
+	 ************************************************************************** -->
+
+<!-- REQUEST -->
+<xsd:element name="listStockRequest" type="eStk:listRequestStockType"/>
+
+<xsd:complexType name="listRequestStockType">
+	<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+		<xsd:element name="requestStock" type="eStk:requestStockType">
+			<xsd:annotation>
+				<xsd:documentation>Atributy určují filtr pro export zásob. Pokud není zadán žádný filtr, vyexportují se všechny zásoby.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:sequence>
+	<xsd:attribute name="version" type="eStk:listRequestStockVerType" use="required"/>
+	<xsd:attribute name="stockVersion" type="stk:stkVersionType" use="required">
+		<xsd:annotation>
+			<xsd:documentation>Požadovaná verze dokladu.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:attribute>
+</xsd:complexType>
+
+<xsd:simpleType name="listRequestStockVerType">
+	<xsd:annotation>
+		<xsd:documentation>Verze, které jsou dostupné k tomuto dokladu. Podrobnosti k jednotlivým verzím najdete na www.stormware.cz/xml</xsd:documentation>
+	</xsd:annotation>
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="1.0"/>
+		<xsd:enumeration value="1.1"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="requestStockType">
+	<xsd:attribute name="id" type="typ:idType"/>
+	<xsd:attribute name="ids" type="typ:idsType"/>
+	<xsd:attribute name="idStorage" type="typ:idType"/>
+</xsd:complexType>
+
+</xsd:schema>

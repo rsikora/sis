@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:exp="http://www.stormware.cz/schema/ExpSet.xsd"
+			xmlns="http://www.stormware.cz/schema/ExpSet.xsd"
+			targetNamespace="http://www.stormware.cz/schema/ExpSet.xsd"
+			elementFormDefault="qualified">
+
+<xsd:element name="ExpSet" type="exp:ExpSetType"/>
+
+<xsd:complexType name="ExpSetType">
+	<xsd:sequence minOccurs="0" maxOccurs="unbounded"> 
+		<xsd:element name="profil" type="exp:ProfilType"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+  <xsd:complexType name="ProfilType">
+  	<xsd:sequence>
+  				<xsd:element name="field" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+  	</xsd:sequence>
+  	<xsd:attribute name="name" type="xsd:string" use="required"/>
+  	<xsd:attribute name="tablename" type="xsd:string" use="required"/>
+  </xsd:complexType>
+</xsd:schema>
+
