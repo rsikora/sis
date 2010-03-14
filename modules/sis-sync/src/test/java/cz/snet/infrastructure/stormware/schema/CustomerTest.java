@@ -21,14 +21,12 @@ import static org.junit.Assert.assertThat;
 public class CustomerTest {
     @Test
     public void testUnmarshalMapping() throws Exception {
-        JAXBContext context = JAXBContext.newInstance("cz.stormware.schema.response:cz.stormware.schema.list");
+        JAXBContext context = JAXBContext.newInstance("cz.stormware.schema.response:cz.stormware.schema.list:cz.stormware.schema.addressbook:cz.stormware.schema.documentresponse");
         Unmarshaller unmarshaller = context.createUnmarshaller();
         InputStream customers = ClassLoader.getSystemResourceAsStream("xml/customers-response-20100313.xml");
         JAXBElement responsePackElement = (JAXBElement) unmarshaller.unmarshal(customers);
         ResponsePackType responsePack = (ResponsePackType) responsePackElement.getValue();
-        System.out.println("customer = " + responsePack.getId());
-        JAXBElement<?> element = responsePack.getResponsePackItem().get(0).getContent().get(0);
-        AddressbookResponseType adreAddressbookResponseType = (AddressbookResponseType) element.getValue();
-        System.out.println(adreAddressbookResponseType.getProducedDetails().getCode());
+        System.out.println(responsePack.getResponsePackItem().get(0).getAddressbookResponse().getProducedDetails().getId());
+        System.out.println(responsePack.getResponsePackItem().get(0).getAddressbookResponse().getProducedDetails().getCode());
     }
 }
