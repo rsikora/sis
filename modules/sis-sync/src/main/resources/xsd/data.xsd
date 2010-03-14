@@ -2,53 +2,19 @@
 <!--  Jmené prostory používané v dokladech --> 
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			xmlns:inv="http://www.stormware.cz/schema/invoice.xsd"
-			xmlns:vch="http://www.stormware.cz/schema/voucher.xsd"
-			xmlns:int="http://www.stormware.cz/schema/intDoc.xsd"
-			xmlns:stk="http://www.stormware.cz/schema/stock.xsd"
-			xmlns:ord="http://www.stormware.cz/schema/order.xsd"
-			xmlns:enq="http://www.stormware.cz/schema/enquiry.xsd"
-			xmlns:ofr="http://www.stormware.cz/schema/offer.xsd"
 			xmlns:lst="http://www.stormware.cz/schema/list.xsd"
-			xmlns:eStk="http://www.stormware.cz/schema/list_stock_1.2.xsd"
-			xmlns:acu="http://www.stormware.cz/schema/accountingunit.xsd"
-			xmlns:vyd="http://www.stormware.cz/schema/vydejka.xsd"
-			xmlns:pri="http://www.stormware.cz/schema/prijemka.xsd"
-			xmlns:pre="http://www.stormware.cz/schema/prevodka.xsd"
-			xmlns:vyr="http://www.stormware.cz/schema/vyroba.xsd"
-			xmlns:pro="http://www.stormware.cz/schema/prodejka.xsd"
 			xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
-			xmlns:prm="http://www.stormware.cz/schema/parameter.xsd"
 			xmlns:typ="http://www.stormware.cz/schema/type.xsd"
 			xmlns:dat="http://www.stormware.cz/schema/data.xsd"
-			xmlns:bal="http://www.stormware.cz/schema/balance.xsd"
-			xmlns:con="http://www.stormware.cz/schema/contract.xsd"
-			xmlns:lst2="http://www.stormware.cz/schema/list_2.xsd"
 			xmlns="http://www.stormware.cz/schema/data.xsd"
 			
 			targetNamespace="http://www.stormware.cz/schema/data.xsd"
 			elementFormDefault="qualified">
 
 <xsd:import namespace="http://www.stormware.cz/schema/invoice.xsd" schemaLocation="invoice.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/voucher.xsd" schemaLocation="voucher.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/intDoc.xsd" schemaLocation="intDoc.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/stock.xsd" schemaLocation="stock.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/order.xsd" schemaLocation="order.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/offer.xsd" schemaLocation="offer.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/enquiry.xsd" schemaLocation="enquiry.xsd"/>
 <xsd:import namespace="http://www.stormware.cz/schema/list.xsd" schemaLocation="list.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/list_stock_1.2.xsd" schemaLocation="list_stock_1.2.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/accountingunit.xsd" schemaLocation="accountingunit.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/vydejka.xsd" schemaLocation="vydejka.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/prijemka.xsd" schemaLocation="prijemka.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/prevodka.xsd" schemaLocation="prevodka.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/vyroba.xsd" schemaLocation="vyroba.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/prodejka.xsd" schemaLocation="prodejka.xsd"/>
 <xsd:import namespace="http://www.stormware.cz/schema/addressbook.xsd" schemaLocation="addressbook.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/parameter.xsd" schemaLocation="parameter.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/balance.xsd" schemaLocation="balance.xsd"/>
 <xsd:import namespace="http://www.stormware.cz/schema/type.xsd" schemaLocation="type.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/contract.xsd" schemaLocation="contract.xsd"/>
-<xsd:import namespace="http://www.stormware.cz/schema/list_2.xsd" schemaLocation="list_2.xsd"/>
 
 <!-- **************************************************************************
 		root element must be <dataPack>
@@ -139,48 +105,10 @@
 	<xsd:choice minOccurs="1" maxOccurs="1">
 		<!--  import dokladù -->
 		<xsd:element ref="adb:addressbook"/>
-		<xsd:element ref="enq:enquiry"/>
-		<xsd:element ref="int:intDoc"/>		
 		<xsd:element ref="inv:invoice"/>		
-		<xsd:element ref="ofr:offer"/>
-		<xsd:element ref="ord:order"/>		
-		<xsd:element ref="pro:prodejka"/>
-		<xsd:element ref="pri:prijemka"/>
-		<xsd:element ref="pre:prevodka"/>
-		<xsd:element ref="stk:stock"/>
-		<xsd:element ref="vch:voucher"/>
-		<xsd:element ref="vyd:vydejka"/>
-		<xsd:element ref="vyr:vyroba"/>
-		<xsd:element ref="con:contract" />
-  	<xsd:element ref="prm:parameter"/>
 		<!--  export dokladù -->
 		<xsd:element ref="lst:listAddressBookRequest"/>
 		<xsd:element ref="lst:listInvoiceRequest"/>
-		<xsd:element ref="lst:listEnquiryRequest"/>		
-		<xsd:element ref="lst:listOfferRequest"/>
-		<xsd:element ref="lst:listOrderRequest"/>		
-		<xsd:element ref="eStk:listStockRequest"/>
-		<xsd:element ref="lst:listParameterRequest"/>
-		<xsd:element ref="lst:listVydejkaRequest"/>
-		<xsd:element ref="lst:listPrijemkaRequest"/>
-		<xsd:element ref="lst:listBalanceRequest"/>
-		<!--  vytvoøení nového záznamu  -->
-		<xsd:element ref="lst:createAccountingDoubleEntry"/>
-		<xsd:element ref="lst:listUserCode"/>
-		<!--  export seznamù -->
-		<xsd:element ref="acu:listAccountingUnitRequest"/>
-		<xsd:element ref="lst:listAccountingDoubleEntryRequest"/>
-		<xsd:element ref="lst:listAccountingSingleEntryRequest"/>		
-		<xsd:element ref="lst:listAccountRequest"/>
-		<xsd:element ref="lst:listActivityRequest"/>		
-		<xsd:element ref="lst:listCashRequest"/>
-		<xsd:element ref="lst:listContractRequest"/>
-		<xsd:element ref="lst2:listContractRequest"/>
-		<xsd:element ref="lst:listCentreRequest"/>		
-		<xsd:element ref="lst:listNumericSeriesRequest"/>		
-		<xsd:element ref="lst:listUserCodeRequest"/>
-		<xsd:element ref="lst:listStorageRequest"/>
-		<xsd:element ref="lst:listSellingPriceRequest"/>
 	</xsd:choice>
   <xsd:attribute name="version" type="dat:dataPackItemVersionType" use="required"/>
 	<xsd:attribute name="id" type="typ:string64" use="required"/>
