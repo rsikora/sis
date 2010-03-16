@@ -8,5 +8,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/home/.gradle/cache/junit/junit/jars/junit-4.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/home/.gradle/cache/log4j/log4j/jars/log4j-1.2.14.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/home/.gradle/cache/org.mockito/mockito-all/jars/mockito-all-1.8.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/home/.gradle/cache/xmlunit/xmlunit/jars/xmlunit-1.3.jar"/>
 	<classpathentry kind="output" path="build/classes/main"/>
 </classpath>
