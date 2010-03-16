@@ -1,11 +1,17 @@
 package cz.snet.infrastructure.stormware.schema;
 
+import cz.stormware.schema.addressbook.AddressbookHeaderType;
 import cz.stormware.schema.addressbook.AddressbookResponseType;
+import cz.stormware.schema.addressbook.AddressbookType;
 import cz.stormware.schema.data.DataPackItemType;
 import cz.stormware.schema.data.DataPackType;
+import cz.stormware.schema.invoice.InvoiceHeaderType;
 import cz.stormware.schema.invoice.InvoiceType;
+import cz.stormware.schema.invoice.InvoiceTypeType;
 import cz.stormware.schema.response.ResponsePackItemType;
 import cz.stormware.schema.response.ResponsePackType;
+import org.custommonkey.xmlunit.Diff;
+import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -38,11 +44,13 @@ public class CustomerTest {
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        InvoiceType invoice = new InvoiceType();
-        invoice.setVersion("1.5");
+        AddressbookType customer = new AddressbookType();
+        AddressbookHeaderType customerHeader = new AddressbookHeaderType();
+        customerHeader.setRegion("REGION");
+        customer.setAddressbookHeader(customerHeader);
 
         DataPackItemType dataPackItem = new DataPackItemType();
-        dataPackItem.setInvoice(invoice);
+        dataPackItem.setAddressbook(customer);
 
         DataPackType dataPack = new DataPackType();
         dataPack.getDataPackItem().add(dataPackItem);
@@ -51,7 +59,25 @@ public class CustomerTest {
         StringWriter writer = new StringWriter();
         marshaller.marshal(dataPackElement, writer);
 
+        String expected = "" +
+                "<dataPack xmlns:dat='http://www.stormware.cz/schema/data.xsd' xmlns:adb='http://www.stormware.cz/schema/addressbook.xsd'>\n" +
+                "  <dat:dataPackItem>\n" +
+                "    <adb:addressbook>\n" +
+                "      <adb:addressbookHeader>\n" +
+                "        <adb:region>REGION</adb:region>\n" +
+                "      </adb:addressbookHeader>\n" +
+                "    </adb:addressbook>\n" +
+                "  </dat:dataPackItem>\n" +
+                "</dataPack>";
+
+        System.out.println(expected);
         System.out.println(writer);
+
+        XMLUnit.setIgnoreAttributeOrder(true);
+        XMLUnit.setIgnoreWhitespace(true);
+
+        Diff diff = XMLUnit.compareXML(expected, writer.toString());
+        assertThat(diff.toString(), diff.similar(), is(true));
     }
 
     @Test
