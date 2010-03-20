@@ -1,5 +1,4 @@
 version = '2.2'
 
 dependencies {
-  testCompile 'xmlunit:xmlunit:1.3'
 }
