@@ -1,5 +1,6 @@
 package cz.snet.domain.model.account;
 
+import cz.snet.domain.model.invoice.charge.ChargeFactory;
 import cz.snet.domain.shared.Entity;
 
 public class Subscription implements Entity<Subscription, SubscriptionId> {
@@ -9,10 +10,10 @@ public class Subscription implements Entity<Subscription, SubscriptionId> {
         return null;
     }
 
-    public Charge[] charges() {
+    public ChargeFactory[] chargeFactories() {
         return null;
     }
 
-    public void add(Charge charge) {
+    public void add(ChargeFactory chargeFactory) {
     }
 }

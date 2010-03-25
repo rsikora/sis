@@ -10,8 +10,8 @@ import java.math.RoundingMode;
  * Time: 4:35:43 PM
  * To change this template use File | Settings | File Templates.
  */
-public class AmountRoundingStrategy implements RoundingStrategy {
-
+public class DefaultAmountRoundingStrategy implements RoundingStrategy {
+    
     @Override
     public BigDecimal round(BigDecimal value) {
         return value.setScale(2, RoundingMode.HALF_UP);

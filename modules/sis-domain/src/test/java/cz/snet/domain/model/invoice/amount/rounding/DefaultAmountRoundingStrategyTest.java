@@ -17,10 +17,10 @@ import static org.junit.Assert.assertThat;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(Theories.class)
-public class AmountRoundingStrategyTest {
-    public static final Logger log = Logger.getLogger(AmountRoundingStrategyTest.class);
+public class DefaultAmountRoundingStrategyTest {
+    public static final Logger log = Logger.getLogger(DefaultAmountRoundingStrategyTest.class);
 
-    public static final RoundingStrategy ROUNDING = new AmountRoundingStrategy();
+    public static final RoundingStrategy ROUNDING = new DefaultAmountRoundingStrategy();
 
     @DataPoints
     public static final RoundingFixture[] fixtures = new RoundingFixture[]{
